@@ -49,6 +49,8 @@ const int DISPLAY_NONE = 0;
 const int DISPLAY_BLOCK = 1;
 const int DISPLAY_INLINE = 2;
 const int DISPLAY_INLINE_BLOCK = 3;
+const int DISPLAY_FLEXBOX = 4;
+const int DISPLAY_INLINE_FLEXBOX = 5;
 
 const int VISIBILITY_VISIBLE = 0;
 const int VISIBILITY_HIDDEN = 1;
@@ -112,6 +114,27 @@ const int TAB_INDEX_AUTO = 1;
 
 const int FOCUS_NONE = 0;
 const int FOCUS_AUTO = 1;
+
+const int FLEX_FLOW_ROW = 0;
+const int FLEX_FLOW_ROW_REVERSE = 1;
+const int FLEX_FLOW_COLUMN = 2;
+const int FLEX_FLOW_COLUMN_REVERSE = 3;
+
+const int FLEX_PACK_START = 0;
+const int FLEX_PACK_END = 1;
+const int FLEX_PACK_CENTER = 2;
+const int FLEX_PACK_JUSTIFY = 3;
+
+const int FLEX_ALIGN_START = 0;
+const int FLEX_ALIGN_END = 1;
+const int FLEX_ALIGN_CENTER = 2;
+const int FLEX_ALIGN_BASELINE = 3;
+const int FLEX_ALIGN_STRETCH = 4;
+
+const int FLEX_LINE_PACK_START = 0;
+const int FLEX_LINE_PACK_END = 1;
+const int FLEX_LINE_PACK_CENTER = 2;
+const int FLEX_LINE_PACK_JUSTIFY = 3;
 
 }
 }
