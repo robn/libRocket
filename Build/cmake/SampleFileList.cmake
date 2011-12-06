@@ -29,6 +29,13 @@ set(drag_SRC_FILES
     ${PROJECT_SOURCE_DIR}/Samples/basic/drag/src/Inventory.cpp
 )
 
+set(flexbox_HDR_FILES
+)
+
+set(flexbox_SRC_FILES
+    ${PROJECT_SOURCE_DIR}/Samples/basic/flexbox/src/main.cpp
+)
+
 set(loaddocument_HDR_FILES
 )
 

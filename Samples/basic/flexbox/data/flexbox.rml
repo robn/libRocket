@@ -1,0 +1,49 @@
+<rml>
+
+<!--
+Flexbox examples from the 20111129 working draft.
+-->
+
+<head>
+	<link type="text/rcss" href="../../../assets/rkt.rcss"/>
+	<link type="text/rcss" href="../../../assets/invader.rcss"/>
+</head>
+<body>
+
+	<!--
+		+--------------------------------------------+
+		| +----------------+ +---------+ +---------+ |
+		| | Child 1        | | Child 2 | | Child 3 | |
+		| | Another line   | +---------+ +---------+ |
+		| +----------------+                         |
+		+--------------------------------------------+
+	-->
+	<div style="width: 500px; display: flexbox; flex-pack: justify; flex-align: center;">
+		<span style="width: 200px;">Child 1<br/>Another Line</span>
+		<span style="width: 100px;">Child 2</span>
+		<span style="width: 100px;">Child 3</span>
+	</div>
+
+	<!--
+		+-----------------------------+
+		|     +-----------------+     |
+		|     | foo foo foo foo |     |
+		|     +-----------------+     |
+		|         +---------+         |
+		|         | bar bar |         |
+		|         | bar bar |         |
+		|         +---------+         |
+		| +-------------------------+ |
+		| | foo foo foo foo foo foo | |
+		| | foo foo foo foo foo foo | |
+		| +-------------------------+ |
+		+-----------------------------+
+	-->
+	<div style="width: 500px; display: flexbox; flex-flow: column;">
+		<div>foo foo foo foo</div>
+		<div>bar bar<br/>bar bar</div>
+		<div>foo foo foo foo foo foo foo foo foo foo foo foo</div>
+	</div>
+
+</body>
+</rml>

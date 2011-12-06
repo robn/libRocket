@@ -193,7 +193,7 @@ endmacro()
 
 if(BUILD_SAMPLES)
     include(SampleFileList)
-	set(samples treeview customlog drag loaddocument)
+	set(samples treeview customlog drag loaddocument flexbox)
     
     set(sample_LIBRARIES
     	shell 
