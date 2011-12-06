@@ -95,6 +95,11 @@ extern const String CURSOR;
 extern const String DRAG;
 extern const String TAB_INDEX;
 extern const String SCROLLBAR_MARGIN;
+extern const String FLEX_FLOW;
+extern const String FLEX_ORDER;
+extern const String FLEX_PACK;
+extern const String FLEX_ALIGN;
+extern const String FLEX_LINE_PACK;
 
 extern const String MOUSEDOWN;
 extern const String MOUSESCROLL;

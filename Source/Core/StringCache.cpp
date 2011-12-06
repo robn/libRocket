@@ -92,6 +92,11 @@ const String CURSOR = "cursor";
 const String DRAG = "drag";
 const String TAB_INDEX = "tab-index";
 const String SCROLLBAR_MARGIN = "scrollbar-margin";
+const String FLEX_FLOW = "flex-flow";
+const String FLEX_ORDER = "flex-order";
+const String FLEX_PACK = "flex-pack";
+const String FLEX_ALIGN = "flex-align";
+const String FLEX_LINE_PACK = "flex-line-pack";
 
 const String MOUSEDOWN = "mousedown";
 const String MOUSESCROLL = "mousescroll";
