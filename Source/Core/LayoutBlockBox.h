@@ -36,6 +36,7 @@ namespace Rocket {
 namespace Core {
 
 class LayoutBlockBoxSpace;
+class LayoutFlexBox;
 class LayoutEngine;
 
 /**
@@ -96,6 +97,12 @@ public:
 	/// @param box[in] The box defining the element's bounds.
 	/// @return The inline box representing the element. Once the element's children have been positioned, Close() must be called on it.
 	LayoutInlineBox* AddInlineElement(Element* element, const Box& box);
+	/// Adds a new flexbox element to this block-context box.
+	/// @param element[in] The new flexbox element.
+	/// @param placed[in] True if the element is to be placed, false otherwise.
+	/// @return The flexbox representing the element. Once the element's children have been positioned, Close() must be called on it.
+	LayoutFlexBox* AddFlexBoxElement(Element* element);
+	
 	/// Adds a line-break to this block box.
 	void AddBreak();
 

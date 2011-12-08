@@ -105,6 +105,9 @@ private:
 	/// Positions an element as a sized inline element, formatting its internal hierarchy as a block element.
 	/// @param[in] element The replaced element.
 	void FormatElementReplaced(Element* element);
+	/// Formats and positions an element as a flexbox element.
+	/// @param[in] element The flexbox element.
+	bool FormatElementFlexBox(Element* element);
 	/// Executes any special formatting for special elements.
 	/// @param[in] element The element to parse.
 	/// @return True if the element was parsed as a special element, false otherwise.

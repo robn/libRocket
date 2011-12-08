@@ -28,6 +28,7 @@
 #include "precompiled.h"
 #include "LayoutBlockBox.h"
 #include "LayoutBlockBoxSpace.h"
+#include "LayoutFlexBox.h"
 #include "LayoutEngine.h"
 #include <Rocket/Core/Element.h>
 #include <Rocket/Core/ElementUtilities.h>
@@ -379,6 +380,44 @@ LayoutInlineBox* LayoutBlockBox::AddInlineElement(Element* element, const Box& b
 		// We're an inline context box, so we'll add this new inline element into our line boxes.
 		return line_boxes.back()->AddElement(element, box);
 	}
+}
+
+// Adds a new flexbox element to this block box.
+LayoutFlexBox* LayoutBlockBox::AddFlexBoxElement(Element* element)
+{
+	ROCKET_ASSERT(context == BLOCK);
+
+    // XXX FLEXBOX do something here
+
+	// Check if our most previous block box is rendering in an inline context.
+	if (!block_boxes.empty() &&
+		block_boxes.back()->context == INLINE)
+	{
+		LayoutBlockBox* inline_block_box = block_boxes.back();
+		LayoutInlineBox* open_inline_box = inline_block_box->line_boxes.back()->GetOpenInlineBox();
+		if (open_inline_box != NULL)
+		{
+			// There's an open inline box chain, which means this block element is parented to it. The chain needs to
+			// be positioned (if it hasn't already), closed and duplicated after this block box closes. Also, this
+			// block needs to be aware of its parentage, so it can correctly compute its relative position. First of
+			// all, we need to close the inline box; this will position the last line if necessary, but it will also
+			// create a new line in the inline block box; we want this line to be in an inline box after our block
+			// element.
+			if (inline_block_box->Close() != OK)
+				return NULL;
+
+			interrupted_chain = open_inline_box;
+		}
+		else
+		{
+			// There are no open inline boxes, so this inline box just needs to be closed.
+			if (CloseInlineBlockBox() != OK)
+				return NULL;
+		}
+	}
+
+	block_boxes.push_back(new LayoutFlexBox(layout_engine, this, element));
+	return static_cast<LayoutFlexBox*>(block_boxes.back());
 }
 
 // Adds a line-break to this block box.

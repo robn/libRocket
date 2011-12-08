@@ -29,6 +29,7 @@
 #include "LayoutEngine.h"
 #include <Rocket/Core/Math.h>
 #include "Pool.h"
+#include "LayoutFlexBox.h"
 #include "LayoutBlockBoxSpace.h"
 #include "LayoutInlineBoxText.h"
 #include <Rocket/Core/Element.h>
@@ -326,6 +327,7 @@ bool LayoutEngine::FormatElement(Element* element)
 		case DISPLAY_BLOCK:			return FormatElementBlock(element); break;
 		case DISPLAY_INLINE:		return FormatElementInline(element); break;
 		case DISPLAY_INLINE_BLOCK:	FormatElementReplaced(element); break;
+		case DISPLAY_FLEXBOX:		return FormatElementFlexBox(element); break;
 		default:					ROCKET_ERROR;
 	}
 
@@ -411,6 +413,58 @@ void LayoutEngine::FormatElementReplaced(Element* element)
 	layout_engine.FormatElement(element, GetContainingBlock(block_context_box));
 
 	block_context_box->AddInlineElement(element, element->GetBox())->Close();
+}
+
+// Formats and positions an element as a block element.
+bool LayoutEngine::FormatElementFlexBox(Element* element)
+{
+	LayoutBlockBox* new_block_context_box = block_context_box->AddFlexBoxElement(element);
+	if (new_block_context_box == NULL)
+		return false;
+	
+	// XXX FLEXBOX identical to FormatElementBlock. merge
+
+	block_context_box = new_block_context_box;
+
+	// Format the element's children.
+	for (int i = 0; i < element->GetNumChildren(); i++)
+	{
+		if (!FormatElement(element->GetChild(i)))
+			i = -1;
+	}
+
+	// Close the block box, and check the return code; we may have overflowed either this element or our parent.
+	new_block_context_box = block_context_box->GetParent();
+	switch (block_context_box->Close())
+	{
+		// We need to reformat ourself; format all of our children again and close the box. No need to check for error
+		// codes, as we already have our vertical slider bar.
+		case LayoutBlockBox::LAYOUT_SELF:
+		{
+			for (int i = 0; i < element->GetNumChildren(); i++)
+				FormatElement(element->GetChild(i));
+
+			if (block_context_box->Close() == LayoutBlockBox::OK)
+			{
+				element->OnLayout();
+				break;
+			}
+		}
+
+		// We caused our parent to add a vertical scrollbar; bail out!
+		case LayoutBlockBox::LAYOUT_PARENT:
+		{
+			block_context_box = new_block_context_box;
+			return false;
+		}
+		break;
+
+		default:
+			element->OnLayout();
+	}
+
+	block_context_box = new_block_context_box;
+	return true;
 }
 
 // Executes any special formatting for special elements.
