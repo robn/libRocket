@@ -257,7 +257,7 @@ void StyleSheetSpecification::RegisterDefaultProperties()
 
 	RegisterProperty(SCROLLBAR_MARGIN, "0", false, false).AddParser("number");
 
-	RegisterProperty(FLEX_FLOW, "row", false, true).AddParser("keyword", "row, row-reverse, column, column-reverse"); // XXX wrap, wrap-reverse
+	RegisterProperty(FLEX_FLOW, "row", false, true).AddParser("keyword", "row, row-reverse, column, column-reverse"); // XXX FLEXBOX wrap, wrap-reverse
 	RegisterProperty(FLEX_ORDER, "0", false, true).AddParser("number");
 	RegisterProperty(FLEX_PACK, "start", false, true).AddParser("keyword", "start, end, center, justify");
 	RegisterProperty(FLEX_ALIGN, "stretch", false, true).AddParser("keyword", "start, end, center, baseline, stretch");
